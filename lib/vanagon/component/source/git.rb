@@ -100,7 +100,7 @@ class Vanagon
         # accessor for @clone
         def clone
           warn %(Clone #{@clone_options})
-          if @clone_options.blank?
+          if @clone_options.empty?
             @clone ||= ::Git.clone(url, dirname, path: workdir)
           else
             @clone ||= ::Git.clone(url, dirname, path: workdir, **@clone_options)
