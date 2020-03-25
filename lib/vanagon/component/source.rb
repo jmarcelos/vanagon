@@ -32,7 +32,6 @@ class Vanagon
           end
 
           if source_type == :git
-            warn %(clone options source #{options[:clone_options]})
             return Vanagon::Component::Source::Git.new uri,
               sum: options[:sum],
               ref: options[:ref],

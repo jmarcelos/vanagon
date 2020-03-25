@@ -55,7 +55,6 @@ class Vanagon
           @url = URI.parse(url.to_s)
           @ref = opts[:ref]
           @workdir = File.realpath(workdir)
-          warn %("Clone options #{options[:clone_options]}")
           @clone_options = options[:clone_options] or {}
           # We can test for Repo existence without cloning
           raise Vanagon::InvalidRepo, "#{url} not a valid Git repo" unless valid_remote?
@@ -99,10 +98,10 @@ class Vanagon
         # Perform a git clone of @url as a lazy-loaded
         # accessor for @clone
         def clone
-          warn %(Clone #{@clone_options})
           if @clone_options.empty?
             @clone ||= ::Git.clone(url, dirname, path: workdir)
           else
+            warn %(Clone #{@clone_options})
             @clone ||= ::Git.clone(url, dirname, path: workdir, **@clone_options)
           end
 

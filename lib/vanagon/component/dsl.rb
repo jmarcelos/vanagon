@@ -337,7 +337,6 @@ class Vanagon
       #
       # @param the_clone_options [Map] branch, depth to checkout for a git source
       def clone_options(clone_options)
-        warn %(clone_options set #{clone_options})
         @component.options[:clone_options] = clone_options
       end
 
