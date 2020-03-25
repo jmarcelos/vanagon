@@ -48,7 +48,7 @@ class Vanagon
         # @param url [String] url of git repo to use as source
         # @param ref [String] ref to checkout from git repo
         # @param workdir [String] working directory to clone into
-        def initialize(url, workdir:, clone_options, **options)
+        def initialize(url, workdir:, clone_options:, **options)
           opts = default_options.merge(options.reject { |k, v| v.nil? })
 
           # Ensure that #url returns a URI object
