@@ -48,15 +48,15 @@ class Vanagon
         # @param url [String] url of git repo to use as source
         # @param ref [String] ref to checkout from git repo
         # @param workdir [String] working directory to clone into
-        def initialize(url, workdir:, clone_options:, **options)
+        def initialize(url, workdir:, **options)
           opts = default_options.merge(options.reject { |k, v| v.nil? })
 
           # Ensure that #url returns a URI object
           @url = URI.parse(url.to_s)
           @ref = opts[:ref]
           @workdir = File.realpath(workdir)
-          warn %("Clone options #{clone_options}")
-          @clone_options = clone_options
+          warn %("Clone options #{options[:clone_options]}")
+          @clone_options = options[:clone_options] or {}
           # We can test for Repo existence without cloning
           raise Vanagon::InvalidRepo, "#{url} not a valid Git repo" unless valid_remote?
         end
@@ -99,8 +99,13 @@ class Vanagon
         # Perform a git clone of @url as a lazy-loaded
         # accessor for @clone
         def clone
-          warn %(Clone #{clone_options})
-          @clone ||= ::Git.clone(url, dirname, path: workdir, **clone_options)
+          warn %(Clone #{@clone_options})
+          if @clone_options.blank?
+            @clone ||= ::Git.clone(url, dirname, path: workdir)
+          else
+            @clone ||= ::Git.clone(url, dirname, path: workdir, **@clone_options)
+          end
+
         end
 
         # Attempt to connect to whatever URL is provided and

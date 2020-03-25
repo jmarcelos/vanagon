@@ -66,8 +66,6 @@ class Vanagon
     # to building a given component (git ref, sha, etc.). Probably conflicts
     # or collides with #settings to some degree.
     attr_accessor :options
-    # used to hold clone options such as branch, depth
-    attr_accessor :clone_options
     # the platform that a given component will be built for -- due to the
     # fact that Ruby is pass-by-reference, it's usually just a reference
     # to the same Platform object that the overall Project object also
@@ -157,7 +155,6 @@ class Vanagon
       @settings = settings
       @platform = platform
       @options = {}
-      @clone_options = {}
       @build_requires = []
       @requires = []
       @configure = []
