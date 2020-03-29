@@ -33,6 +33,7 @@ class Vanagon
           end
 
           if source_type == :git
+            warn %("Joaoaoaoao #{uri}")
             return Vanagon::Component::Source::Git.new uri,
               sum: options[:sum],
               ref: options[:ref],
