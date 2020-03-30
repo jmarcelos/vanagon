@@ -27,13 +27,11 @@ class Vanagon
             # url with `git:`, so something like `git:https://github.com/puppetlabs/vanagon`
             # strip the leading `git:` so we have a valid uri
             uri.sub!(/^git:http/, 'http')
-            warn %("Joaoaoaoao #{uri}")
           else
             source_type = determine_source_type(uri)
           end
 
           if source_type == :git
-            warn %("Joaoaoaoao #{uri}")
             return Vanagon::Component::Source::Git.new uri,
               sum: options[:sum],
               ref: options[:ref],
