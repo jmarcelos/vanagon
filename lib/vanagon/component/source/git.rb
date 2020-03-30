@@ -132,9 +132,10 @@ class Vanagon
         # Clone a remote repo, make noise about it, and fail entirely
         # if we're unable to retrieve the remote repo
         def clone!
+          warn "Cloning Git repo '#{url}'"
           warn "Successfully cloned '#{dirname}'" if clone
         rescue ::Git::GitExecuteError
-          raise Vanagon::InvalidRepo, "Unable to clone from provided url"
+          raise Vanagon::InvalidRepo, "Unable to clone from '#{url}'"
         end
         private :clone!
 
@@ -144,7 +145,7 @@ class Vanagon
           warn "Checking out '#{ref}' from Git repo '#{dirname}'"
           clone.checkout(ref)
         rescue ::Git::GitExecuteError
-          raise Vanagon::CheckoutFailed, "unable to checkout #{ref} from provided url"
+          raise Vanagon::CheckoutFailed, "unable to checkout #{ref} from '#{url}'"
         end
         private :checkout!
 

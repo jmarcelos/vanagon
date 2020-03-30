@@ -277,6 +277,7 @@ class Vanagon
     # @return [Boolean] return True if the source can be retrieved,
     #   or False otherwise
     def fetch_url(options)
+      warn %(Attempting to fetch from canonical URL "#{url}")
       @source = Vanagon::Component::Source.source(url, options)
       # Explicitly coerce the return value of #source.fetch,
       # because each subclass of Vanagon::Component::Source returns
