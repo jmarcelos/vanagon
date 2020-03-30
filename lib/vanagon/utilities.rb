@@ -82,7 +82,7 @@ class Vanagon
     rescue Errno::ETIMEDOUT, Timeout::Error, Errno::EINVAL, Errno::ECONNRESET,
       EOFError, Net::HTTPBadResponse, Net::HTTPHeaderSyntaxError,
       Net::ProtocolError => e
-      raise Vanagon::Error.wrap(e, "Problem reaching #{url}. Is #{uri.host} down?")
+      raise Vanagon::Error.wrap(e, "Problem reaching url. Is #{uri.host} down?")
     rescue JSON::ParserError => e
       raise Vanagon::Error.wrap(e, "#{uri.host} handed us a response that doesn't look like JSON.")
     end

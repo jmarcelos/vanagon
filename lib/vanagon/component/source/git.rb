@@ -57,7 +57,7 @@ class Vanagon
           @workdir = File.realpath(workdir)
           @clone_options = options[:clone_options] or {}
           # We can test for Repo existence without cloning
-          raise Vanagon::InvalidRepo, "#{url} not a valid Git repo" unless valid_remote?
+          raise Vanagon::InvalidRepo, "not a valid Git repo" unless valid_remote?
         end
 
         # Fetch the source. In this case, clone the repository into the workdir
@@ -132,10 +132,9 @@ class Vanagon
         # Clone a remote repo, make noise about it, and fail entirely
         # if we're unable to retrieve the remote repo
         def clone!
-          warn "Cloning Git repo '#{url}'"
           warn "Successfully cloned '#{dirname}'" if clone
         rescue ::Git::GitExecuteError
-          raise Vanagon::InvalidRepo, "Unable to clone from '#{url}'"
+          raise Vanagon::InvalidRepo, "Unable to clone from url"
         end
         private :clone!
 
@@ -145,7 +144,7 @@ class Vanagon
           warn "Checking out '#{ref}' from Git repo '#{dirname}'"
           clone.checkout(ref)
         rescue ::Git::GitExecuteError
-          raise Vanagon::CheckoutFailed, "unable to checkout #{ref} from '#{url}'"
+          raise Vanagon::CheckoutFailed, "unable to checkout #{ref} from url"
         end
         private :checkout!
 
