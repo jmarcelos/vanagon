@@ -67,7 +67,7 @@ class Vanagon
               target = target_match[1]
               return File.join(rule, target)
             else
-              raise Vanagon::Error, "Unable to apply url rewrite to url, expected to find at least one '/' in the url."
+              raise Vanagon::Error, "Unable to apply url rewrite to url', expected to find at least one '/' in the url."
             end
           end
 
