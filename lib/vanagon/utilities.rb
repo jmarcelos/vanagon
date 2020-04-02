@@ -9,6 +9,7 @@ require 'timeout'
 # but it provides a wealth of useful constants
 require 'English'
 require 'vanagon/extensions/string'
+require 'logger'
 
 class Vanagon
   module Utilities
@@ -97,6 +98,7 @@ class Vanagon
     # @raise [Vanagon::Error] If the command fails an exception is raised
     def ex(command)
       ret = %x(#{command})
+      warn %( Joaoaoa ----> #{command})
       unless $CHILD_STATUS.success?
         raise Vanagon::Error, "'#{command}' did not succeed"
       end
