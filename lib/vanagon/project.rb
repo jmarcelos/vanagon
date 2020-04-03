@@ -467,6 +467,7 @@ class Vanagon
       if scripts.empty?
         return ': no postinstall scripts provided'
       else
+        puts "Vai executar #{scripts.join("\n")}"
         return scripts.join("\n")
       end
     end

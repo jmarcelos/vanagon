@@ -40,6 +40,9 @@ class Makefile
       @target = target
       @dependencies = dependencies
       @recipe = recipe
+      puts "Joao- Makefile #{recipe}"
+      puts "Joao- Makefile #{target}"
+      puts "Joao- Makefile #{dependencies}"
 
       yield(self) if block
     end
@@ -71,7 +74,9 @@ class Makefile
     #
     # @return [String]
     def format
-      [base_target, compounded_recipe].flatten.join("\n")
+      result = [base_target, compounded_recipe].flatten.join("\n")
+      puts "Format rule Makefile #{result}"
+      result
     end
     alias to_s format
   end

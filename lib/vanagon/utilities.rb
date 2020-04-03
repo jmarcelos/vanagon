@@ -174,6 +174,7 @@ class Vanagon
       unless extra_flags.empty?
         flags << " " << extra_flags.join(" ")
       end
+      puts "Executando RYSNC!! #{rsync} -e '#{ssh_command(port)}' #{flags} #{source} #{target}:#{dest}"
       ex("#{rsync} -e '#{ssh_command(port)}' #{flags} #{source} #{target}:#{dest}")
     end
 
@@ -221,6 +222,7 @@ class Vanagon
       warn "Executing '#{command}' on '#{target}'"
       if return_command_output
         ret = %x(#{ssh_command(port)} -T #{target} '#{command.gsub("'", "'\\\\''")}').chomp
+        puts "Executando remote ssh ?? " << ret
         if $CHILD_STATUS.success?
           return ret
         else
@@ -241,7 +243,7 @@ class Vanagon
     # @raise [RuntimeError] If the command fails an exception is raised
     def local_command(command, return_command_output: false)
       clean_environment do
-        warn "Executing '#{command}' locally"
+        warn "Joao!!! Executing '#{command}' locally"
         if return_command_output
           ret = %x(#{command}).chomp
           if $CHILD_STATUS.success?
