@@ -55,7 +55,7 @@ class Vanagon
           @url = URI.parse(url.to_s)
           @ref = opts[:ref]
           @workdir = File.realpath(workdir)
-          @clone_options = options[:clone_options] or {}
+          @clone_options = options[:clone_options] ||= {}
           # We can test for Repo existence without cloning
           raise Vanagon::InvalidRepo, "not a valid Git repo" unless valid_remote?
         end
@@ -101,10 +101,8 @@ class Vanagon
           if @clone_options.empty?
             @clone ||= ::Git.clone(url, dirname, path: workdir)
           else
-            warn %(Clone #{@clone_options})
             @clone ||= ::Git.clone(url, dirname, path: workdir, **@clone_options)
           end
-
         end
 
         # Attempt to connect to whatever URL is provided and
